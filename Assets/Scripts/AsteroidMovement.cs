@@ -20,9 +20,9 @@ public class AsteroidMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            collision.gameObject.SetActive(false); //Making bullet to inactive
+            collision.gameObject.SetActive(false); //Making bullet to inactive and back to pool
             print("bullet is made inactive");
-            this.gameObject.SetActive(false);      //Making astreroid to inactivex
+            this.gameObject.SetActive(false);      //Making astreroid to inactive and back to pool
             print("Asteroid is inactive");
         }
     }
