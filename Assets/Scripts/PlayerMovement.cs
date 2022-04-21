@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     int maxHealth = 10;
     // public GameObject bulletPrefab;
     public Vector3 offSet;
+    public Slider healthBar;
     public bool isGameOver = false;
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
         {
 
             float inputX = Input.GetAxis("Horizontal") * playerSpeed;
+            healthBar.value = (float)playerHealth/10;
             transform.Translate(0f, -inputX * Time.deltaTime, 0f);
             //Clamp player position within gameWindow
 
