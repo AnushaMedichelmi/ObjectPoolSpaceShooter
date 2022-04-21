@@ -47,7 +47,7 @@ public class PoolScript : MonoBehaviour
 
     public GameObject GetObjectsFromPool(string tagname)
     {
-        for(int i = 0;i < pools.Count;i++)
+        for(int i = 0;i < pools.Count;i++ && pools[i].gameObject.activeInHierarchy)
         {
             if (tagname == "Asteroid")
             {
@@ -60,6 +60,16 @@ public class PoolScript : MonoBehaviour
             }
         }
         return null;
+        foreach(PoolObject item in poolObjects)
+        {
+            if(item.prefab.tag==tagname)
+            {
+                GameObject temp=Instantiate(item.prefab);
+                temp.SetActive(false);
+                pools.Add(temp);
+                return temp;
+            }
+        }
     }
 }
 [System.Serializable]

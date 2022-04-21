@@ -15,15 +15,26 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Random.Range(0, 100) < 3f)
+        /* if (Random.Range(0, 100) < 3f)
+         {
+
+
+             //float X = Random.Range(-3.0f, 3.0f);
+
+            GameObject temp=PoolScript.instance.GetObjectsFromPool("Bullet");
+             temp.SetActive(true);
+
+         }*/
+
+        GameObject temp = PoolScript.instance.GetObjectsFromPool("Bullet");
+        if (temp != null)
         {
+            if (Random.Range(0, 100) < 3f)
+            {
 
-           
-            //float X = Random.Range(-3.0f, 3.0f);
-           
-           GameObject temp=PoolScript.instance.GetObjectsFromPool("Bullet");
-            temp.SetActive(true);
-
+                temp.transform.position = this.transform.position + new Vector3(0f, Random.Range(-3f, 3f), 0f);
+                temp.SetActive(true);
+            }
         }
     }
 }
