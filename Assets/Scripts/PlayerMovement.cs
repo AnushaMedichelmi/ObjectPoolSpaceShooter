@@ -20,10 +20,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+           
         if (!isGameOver)
         {
-            float inputX = Input.GetAxis("Horizontal");
-            transform.Translate(0f, inputX * playerSpeed * Time.deltaTime, 0f);
+
+            float inputX = Input.GetAxis("Horizontal") * playerSpeed;
+            transform.Translate(0f, -inputX * Time.deltaTime, 0f);
             //Clamp player position within gameWindow
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -39,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         if (playerHealth == 0)               //If health of the player is equal to 0
         {
             Destroy(gameObject);             //Destroying the player
-            //isGameOver = true;
+            isGameOver = true;
            // print("GameOver");
 
         }
@@ -50,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerHealth--;                             //decreasing the health of the player
             collision.gameObject.SetActive(false);      
-            print("player Health Dec:" + playerHealth);        //Printing the health of the player
+            print("player Health Decreased:" + playerHealth);        //Printing the health of the player
              
         }
 
@@ -61,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerHealth = Mathf.Clamp(playerHealth + 1, 0, maxHealth);  //Increasing health of the player
             collision.gameObject.SetActive(false);                       //Making the health back to pool
-            print("player Health inc:" + playerHealth);                   //Printing health of the player
+            print("player Health increased:" + playerHealth);                   //Printing health of the player
         }
     }
 }

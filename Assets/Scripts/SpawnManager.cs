@@ -7,17 +7,17 @@ public class SpawnManager : MonoBehaviour
 
     float time;
     float healthTime;
-    PlayerMovement PlayerMovement;
+    PlayerMovement playerMovement;
     // Start is called before the first frame update
     void Start()
     {
-        PlayerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!PlayerMovement.isGameOver)
+        if (!playerMovement.isGameOver)
         {
             time = time + Time.deltaTime;
             if (time > 3f)
