@@ -5,36 +5,47 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
 
-    public GameObject Asteroid;
+    float time;
+    float healthTime;
+    PlayerMovement PlayerMovement;
     // Start is called before the first frame update
     void Start()
     {
-        //asteroid = GetComponent<GameObject>();
+        PlayerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        /* if (Random.Range(0, 100) < 3f)
-         {
-
-
-             //float X = Random.Range(-3.0f, 3.0f);
-
-            GameObject temp=PoolScript.instance.GetObjectsFromPool("Bullet");
-             temp.SetActive(true);
-
-         }*/
-
-        GameObject temp = PoolScript.instance.GetObjectsFromPool("Bullet");
-        if (temp != null)
+        if (!PlayerMovement.isGameOver)
         {
-            if (Random.Range(0, 100) < 3f)
+            time = time + Time.deltaTime;
+            if (time > 3f)
             {
+                // GameObject temp=Instantiate(ObjectPoolScript.instance.GetObjectsFromPool("Asteroid"),new Vector3(Random.Range(-8.0f, 8f),4f,0f),Quaternion.identity);
+                GameObject tempAsteroid = (PoolScript.instance.GetObjectsFromPool("Asteroid"));
 
-                temp.transform.position = this.transform.position + new Vector3(0f, Random.Range(-3f, 3f), 0f);
-                temp.SetActive(true);
+                tempAsteroid.transform.position = new Vector3(Random.Range(-8.0f, 8f), 4f, 0f);
+                tempAsteroid.SetActive(true);
+
+                time = 0;
+                /* if (temp != null)
+                 {
+                     this.transform.position = temp.transform.position+new Vector3(Random.Range(-8.0f, 8f), 4f, 0f);
+                     temp.SetActive(true);
+                     time = 0;
+                 }*/
+            }
+            healthTime = healthTime + Time.deltaTime;
+            if (healthTime > 5f)
+            {
+                GameObject tempHealth = (PoolScript.instance.GetObjectsFromPool("Health"));
+                tempHealth.transform.position = new Vector3(Random.Range(-8.0f, 8f), 4f, 0f);
+                tempHealth.SetActive(true);
+                healthTime = 0;
             }
         }
+
+
     }
 }

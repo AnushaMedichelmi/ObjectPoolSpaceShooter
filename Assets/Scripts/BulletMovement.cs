@@ -6,6 +6,8 @@ public class BulletMovement : MonoBehaviour
 {
 
     // Start is called before the first frame update
+
+    public int bulletSpeed;
     void Start()
     {
         
@@ -14,7 +16,8 @@ public class BulletMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left*Time.deltaTime );
-        
+       // transform.Translate(Vector3.left*Time.deltaTime );
+        transform.Translate(-bulletSpeed * Time.deltaTime, 0f, 0f);
+
     }
 }

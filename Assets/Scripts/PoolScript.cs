@@ -8,15 +8,8 @@ public class PoolScript : MonoBehaviour
 
     // private static PoolScript instance;
     public static PoolScript instance;
-    public List<GameObject> pools = new List<GameObject>();
-    public List<PoolObject> poolObjects = new List<PoolObject>();
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        AddToPool();
-    }
+    public List<GameObject> pool = new List<GameObject>();
+    public List<PoolObject> poolItems = new List<PoolObject>();
     private void Awake()
     {
         if (instance == null)
@@ -25,58 +18,65 @@ public class PoolScript : MonoBehaviour
         }
         return;
     }
+    void Start()
+    {
+        AddToPool();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+
+        }
 
     }
 
     public void AddToPool()
     {
-        foreach (PoolObject item in poolObjects)
+        foreach (PoolObject item in poolItems)
         {
             for (int i = 0; i < item.amount; i++)
             {
                 GameObject temp = Instantiate(item.prefab);
                 temp.SetActive(false);
-                pools.Add(temp);
+                pool.Add(temp);
+
             }
         }
     }
+    /* public GameObject GetObjectsFromPool(string tagname)
+     {
+         for(int i=0;i<pool.Count;i++)
+         {   if(pool[i].gameObject.tag == tagname)
+             {
+                 return pool[i].gameObject;
+                // pool[i].gameObject.SetActive(true);
+             }
 
-
+         }
+     }*/
     public GameObject GetObjectsFromPool(string tagname)
     {
-        for(int i = 0;i < pools.Count;i++ && pools[i].gameObject.activeInHierarchy)
+        foreach (GameObject item in pool)
         {
-            if (tagname == "Asteroid")
+            if (item.gameObject.tag == tagname && !item.activeInHierarchy)
             {
-               if(pools[i].gameObject.tag==tagname)
-                {
-                    return pools[i];
-                }
-
-               
+                return item;
+                // pool[i].gameObject.SetActive(true);
             }
+
         }
         return null;
-        foreach(PoolObject item in poolObjects)
-        {
-            if(item.prefab.tag==tagname)
-            {
-                GameObject temp=Instantiate(item.prefab);
-                temp.SetActive(false);
-                pools.Add(temp);
-                return temp;
-            }
-        }
+
     }
 }
+
 [System.Serializable]
 public class PoolObject
 {
     public GameObject prefab;
+    public string name;
     public int amount;
-
-   
 }
